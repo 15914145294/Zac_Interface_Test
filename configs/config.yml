@@ -1,0 +1,12 @@
+URL: http://uatweb.zac-esd.com/ad09
+log:
+    file_name: test.log
+    backup: 100
+    console_level: DEBUG
+    file_level: DEBUG
+    pattern: '%(asctime)s - %(levelname)s - %(module)s - %(funcName)s - %(lineno)d  - %(message)s'
+mail:
+    EMAIL_RECEIVER : ''
+    EMAIL_SENDER : '422079695@qq.com'
+    EMAIL_PASSWORD : ''
+    EMAIL_SERVER : '10.18.190.229'
