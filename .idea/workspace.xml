@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a2935fe1-6105-4e9a-9f9c-9ff43e9bf538" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/esdwebsite/esdutil.py" afterPath="$PROJECT_DIR$/esdwebsite/accessutil.py" />
     </list>
     <ignored path="Zac_Interface_Test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -122,6 +121,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="15914145294" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -520,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535769096432</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add name config and generate name">
+      <created>1535771581315</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1535771581315</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -551,7 +562,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="esd website interface test" />
-    <option name="LAST_COMMIT_MESSAGE" value="esd website interface test" />
+    <MESSAGE value="add name config and generate name" />
+    <option name="LAST_COMMIT_MESSAGE" value="add name config and generate name" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
