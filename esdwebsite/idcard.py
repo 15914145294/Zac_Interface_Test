@@ -10,7 +10,7 @@
 import re
 import random
 from datetime import datetime, timedelta, date
-from esdapi.idcard_area_code import area_code_dict
+from esdwebsite.idcard_area_code import area_code_dict
 
 id_code_list = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
 check_code_list = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2]
@@ -60,9 +60,9 @@ def get_idard(age, gender):
 	area_code = random.choice(list(codes))
 	id_number = make_idcard(int(area_code), age, gender)
 	return id_number
-
-
+#
+#
 # if __name__ == "__main__":
 # 	id_number = get_idard(22, 1)
 # 	print(id_number)
-# 	print(is_id_card(id_number))
+# 	# print(is_id_card(id_number))

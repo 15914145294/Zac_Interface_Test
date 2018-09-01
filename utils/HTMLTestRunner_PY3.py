@@ -294,13 +294,13 @@ class Template_mixin(object):
         var w = window.open("", //url
                         name,
                         "resizable,scrollbars,status,width=800,height=450");
-        d = w.document;
-        d.write("<pre>");
-        d.write(html_escape(output_list[id]));
-        d.write("\n");
-        d.write("<a href='javascript:window.close()'>close</a>\n");
-        d.write("</pre>\n");
-        d.close();
+        path_dict = w.document;
+        path_dict.write("<pre>");
+        path_dict.write(html_escape(output_list[id]));
+        path_dict.write("\n");
+        path_dict.write("<a href='javascript:window.close()'>close</a>\n");
+        path_dict.write("</pre>\n");
+        path_dict.close();
     }
     */
     --></script>
@@ -328,7 +328,7 @@ class Template_mixin(object):
             },
             tooltip : {
                 trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%%)"
+                formatter: "{a} <br/>{b} : {c} ({path_dict}%%)"
             },
             color: ['#95b75d', 'grey', '#b64645'],
             legend: {

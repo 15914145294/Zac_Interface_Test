@@ -1,7 +1,7 @@
 # encoding:utf-8
 
-from esdapi.access import AccessApply
-from esdapi.config import ESD_PRODUCTS
+from esdwebsite.access import AccessApply
+from configs.ad09config import ESD_PRODUCTS
 from html.parser import HTMLParser
 
 
