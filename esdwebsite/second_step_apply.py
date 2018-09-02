@@ -63,7 +63,7 @@ class DetailApplySecond(object):
 		data["ContactInfo.OtherRelativesName"] = self.obj.get_name()
 		data["ContactInfo.OtherRelativesPhone"] = self.obj.get_mobile()
 		r = self.s.post(url, data=data,allow_redirects=False)
-		print(r.text)
+		return r.text
 
 
 if __name__ == '__main__':
