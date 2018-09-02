@@ -36,10 +36,9 @@ class DetailApplySecond(object):
 		# 设置省份
 		data["CompanyInfo.ProvinceId"] = ProvinceId
 		# 设置城市
-		data["CompanyInfo.CityId"] = AreaId
+		data["CompanyInfo.CityId"] = CityId
 		# 设置地区
-		data["CompanyInfo.AreaId"] = token
-		print(data)
+		data["CompanyInfo.AreaId"] = AreaId
 		r = self.s.post(url, data=data)
 		return r.text
 
@@ -68,4 +67,4 @@ class DetailApplySecond(object):
 
 
 if __name__ == '__main__':
-	DetailApplySecond().apply4_2()
+	DetailApplySecond().apply4_3()
