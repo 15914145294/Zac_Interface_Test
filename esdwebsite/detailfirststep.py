@@ -3,9 +3,9 @@
 import json
 import collections
 from random import choice
-from utils.util import UtilMethod
+from utils.util import CommonMethods
 from esdwebsite.idcard import get_idard
-from configs.ad09config import first_step_param
+from configs.ad09config import first_step_param, check_state
 # from datas.detailfirststep import ApplyData
 from esdwebsite.access import AccessApply
 from configs.config import BASE_URL
@@ -121,12 +121,15 @@ class DetailApply(Ad09Util):
 		url = BASE_URL + self.Entrance_Assign()
 		p = ".*assignId=(.*)&selectProductCode.*"
 		p2 = 'name="__RequestVerificationToken" type="hidden" value=(.*)?"? /><input id="FromPage"'
-		assignId = UtilMethod.search_regular_data(url, p)
+		assignId = CommonMethods.search_regular_data(url, p)
 		self.s.headers["Referer"] = referer
+		# /SalaryApply2?accessId=e420c18f-21ec-405f-89c6-27f9954cb950&assignId=
+		# dcb61391-c898-47b3-a108-cc848898d524&selectProductCode=Select_Product_Program_Web_Y
+		# &fromPage=ZaEsd-Ad09
 		r = self.s.get(url)
 		text = r.text
 		assert "__RequestVerificationToken" in text
-		token = UtilMethod.search_regular_data(text, p2)
+		token = CommonMethods.search_regular_data(text, p2)
 		return [assignId, token, url]
 
 	def GetVoiceServicePhone(self):
@@ -159,28 +162,40 @@ class DetailApply(Ad09Util):
 		assert len(r.json()) == 0
 		return r.json()
 
-	def CheckApplyState(self, data):
+	def CheckApplyState(self, data=check_state):
 		"""
 		检查申请状态
 		:param data: 身份证，手机号，密码的dict
 		:return:
 		"""
+		result = self.get_SalaryApply2()
+		self.s.headers["Referer"] = result[-1]
 		if not isinstance(data, dict):
 			raise TypeError("Data msut be dict")
 		assert "mobilePhone" in data and "password" in data and "idCard" in data
+		data["mobilePhone"] = access.mobile
+		data["idCard"] = self.idcard
 		url = BASE_URL + "/apply/CheckApplyState"
 		r = self.s.post(url, data=data)
 		try:
-			return r.json()
+			cookie = r.cookies.get_dict()
+			result.append(cookie)
+			assert r.json()["Code"] == 0, "申请单状态错误"
+			return result
 		except:
 			return r.text
 
 	def post_SalaryApply2(self):
+		"""
+		详细申请第一步提交
+		:return:
+		"""
 		# [assignId, token,url]
-		result = self.get_SalaryApply2()
-		print(self.s.cookies)
-		self.s.headers["Referer"] = result[2]
-		print(result[1], "@@@@@@@@@@@@")
+		result = self.CheckApplyState()
+		# 设置referer
+		# self.s.headers["Referer"] = result[2]
+		# 更新cookie 因为检查申请单状态时会更新cookie
+		# self.s.cookies.update(result[-1])
 		url = BASE_URL + "/SalaryApply2?" + "assignid=%s" % result[0]
 		data = first_step_param
 		data["AccountInfo.MobilePhone"] = access.mobile
@@ -189,12 +204,12 @@ class DetailApply(Ad09Util):
 		data["UserInfo.EducationEnum"] = choice(range(5))
 		data["UserInfo.QQNumber"] = self.qq
 		data["UserInfo.IDCard"] = self.idcard
-		data["__RequestVerificationToken"] = result[1]
-		print(data, "88888888888888888888888888")
-		r = self.s.post(url, data=data, allow_redirects=False)
+		data["EstimateId"] = self.d["accessID"]
+		data["__RequestVerificationToken"] = result[1].strip('"')
+		r = self.s.post(url, data=data, allow_redirects=True)
 		return r.text
 
-
-if __name__ == '__main__':
-	o = DetailApply()
-	print(o.post_SalaryApply2())
+#
+# if __name__ == '__main__':
+# 	o = DetailApply()
+# 	print(o.post_SalaryApply2())

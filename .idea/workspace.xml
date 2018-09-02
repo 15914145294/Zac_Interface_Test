@@ -2,18 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2935fe1-6105-4e9a-9f9c-9ff43e9bf538" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/datas/detailfirststep.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/esdwebsite/second_step_apply.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utils/test.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Administrator.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Administrator.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/configs/ad09config.py" afterPath="$PROJECT_DIR$/configs/ad09config.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/esdwebsite/access.py" afterPath="$PROJECT_DIR$/esdwebsite/access.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/esdwebsite/accessutil.py" afterPath="$PROJECT_DIR$/esdwebsite/accessutil.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/esdwebsite/costomparser.py" afterPath="$PROJECT_DIR$/esdwebsite/costomparser.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/esdwebsite/detailfirststep.py" afterPath="$PROJECT_DIR$/esdwebsite/detailfirststep.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/esdwebsite/idcard.py" afterPath="$PROJECT_DIR$/esdwebsite/idcard.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/HTMLTestRunner_PY3.py" afterPath="$PROJECT_DIR$/utils/HTMLTestRunner_PY3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/constants.py" afterPath="$PROJECT_DIR$/utils/constants.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/util.py" afterPath="$PROJECT_DIR$/utils/util.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/esdwebsite/detailapply.py" afterPath="$PROJECT_DIR$/esdwebsite/detailfirststep.py" />
     </list>
     <ignored path="Zac_Interface_Test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="detailfirststep.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="detailfirststep.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/esdwebsite/detailfirststep.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="89" column="67" selection-start-line="89" selection-start-column="52" selection-end-line="89" selection-end-column="67" />
+            <state relative-caret-position="5562">
+              <caret line="211" column="0" selection-start-line="211" selection-start-column="1" selection-end-line="214" selection-end-column="32" />
               <folding>
                 <element signature="e#18#29#0" expanded="true" />
               </folding>
@@ -46,12 +43,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="structures.py" pinned="false" current-in-tab="false">
-        <entry file="file://D:/Python/Python37/Lib/site-packages/requests/structures.py">
+      <file leaf-file-name="second_step_apply.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/esdwebsite/second_step_apply.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="1026">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding>
+                <element signature="e#249#309#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,8 +58,8 @@
       <file leaf-file-name="idcard.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/esdwebsite/idcard.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="62" column="0" selection-start-line="62" selection-start-column="1" selection-end-line="67" selection-end-column="34" />
+            <state relative-caret-position="1647">
+              <caret line="64" column="0" selection-start-line="64" selection-start-column="2" selection-end-line="66" selection-end-column="20" />
               <folding>
                 <element signature="e#255#264#0" expanded="true" />
               </folding>
@@ -68,32 +67,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="access.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/esdwebsite/access.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="54" column="34" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="34" />
-              <folding>
-                <element signature="e#18#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ad09config.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/configs/ad09config.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="36" column="47" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="detailfirststep.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datas/detailfirststep.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
+            <state relative-caret-position="648">
               <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
               <folding>
                 <element signature="e#247#272#0" expanded="true" />
@@ -105,7 +82,7 @@
       <file leaf-file-name="accessutil.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/esdwebsite/accessutil.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
+            <state relative-caret-position="594">
               <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
               <folding>
                 <element signature="e#17#26#0" expanded="true" />
@@ -114,33 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="random.py" pinned="false" current-in-tab="false">
-        <entry file="file://D:/Python/Python37/Lib/random.py">
+      <file leaf-file-name="ad09config.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/configs/ad09config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="258" column="0" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/util.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-              <folding>
-                <element signature="e#25#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sessions.py" pinned="false" current-in-tab="false">
-        <entry file="file://D:/Python/Python37/Lib/site-packages/requests/sessions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="388" column="18" selection-start-line="388" selection-start-column="11" selection-end-line="388" selection-end-column="18" />
+            <state relative-caret-position="249">
+              <caret line="129" column="63" selection-start-line="129" selection-start-column="63" selection-end-line="129" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -175,13 +130,15 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/esdwebsite/costomparser.py" />
         <option value="$PROJECT_DIR$/esdwebsite/detailapply.py" />
-        <option value="$PROJECT_DIR$/configs/ad09config.py" />
-        <option value="$PROJECT_DIR$/utils/util.py" />
         <option value="$PROJECT_DIR$/datas/detailfirststep.py" />
         <option value="$PROJECT_DIR$/esdwebsite/accessutil.py" />
+        <option value="$PROJECT_DIR$/esdwebsite/access.py" />
+        <option value="$PROJECT_DIR$/utils/test.py" />
+        <option value="$PROJECT_DIR$/utils/util.py" />
         <option value="$PROJECT_DIR$/esdwebsite/idcard.py" />
         <option value="$PROJECT_DIR$/esdwebsite/detailfirststep.py" />
-        <option value="$PROJECT_DIR$/esdwebsite/access.py" />
+        <option value="$PROJECT_DIR$/esdwebsite/second_step_apply.py" />
+        <option value="$PROJECT_DIR$/configs/ad09config.py" />
       </list>
     </option>
   </component>
@@ -217,6 +174,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -307,11 +265,10 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="47" />
@@ -339,24 +296,7 @@
       <recent name="D:\Zac_Interface_Test\esdwebsite" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.detailfirststep">
-    <configuration default="false" name="accessutil" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/esdwebsite" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Zac_Interface_Test" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/esdwebsite/accessutil.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.second_step_apply">
     <configuration default="false" name="detailfirststep" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -374,40 +314,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="access" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/esdwebsite" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Zac_Interface_Test" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/esdwebsite/access.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="detailfirststep (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/datas" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Zac_Interface_Test" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/datas/detailfirststep.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="idcard" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -421,6 +327,57 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Zac_Interface_Test" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/esdwebsite/idcard.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="util" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Zac_Interface_Test" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/util.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Zac_Interface_Test" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="second_step_apply" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/esdwebsite" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Zac_Interface_Test" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/esdwebsite/second_step_apply.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -560,19 +517,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.accessutil" />
-      <item index="1" class="java.lang.String" itemvalue="Python.detailfirststep" />
-      <item index="2" class="java.lang.String" itemvalue="Python.access" />
-      <item index="3" class="java.lang.String" itemvalue="Python.detailfirststep (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Python.idcard" />
+      <item index="0" class="java.lang.String" itemvalue="Python.detailfirststep" />
+      <item index="1" class="java.lang.String" itemvalue="Python.idcard" />
+      <item index="2" class="java.lang.String" itemvalue="Python.util" />
+      <item index="3" class="java.lang.String" itemvalue="Python.test" />
+      <item index="4" class="java.lang.String" itemvalue="Python.second_step_apply" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.detailfirststep" />
-        <item index="1" class="java.lang.String" itemvalue="Python.idcard" />
-        <item index="2" class="java.lang.String" itemvalue="Python.access" />
-        <item index="3" class="java.lang.String" itemvalue="Python.detailfirststep (1)" />
-        <item index="4" class="java.lang.String" itemvalue="Python.accessutil" />
+        <item index="0" class="java.lang.String" itemvalue="Python.second_step_apply" />
+        <item index="1" class="java.lang.String" itemvalue="Python.detailfirststep" />
+        <item index="2" class="java.lang.String" itemvalue="Python.idcard" />
+        <item index="3" class="java.lang.String" itemvalue="Python.test" />
+        <item index="4" class="java.lang.String" itemvalue="Python.util" />
       </list>
     </recent_temporary>
   </component>
@@ -625,7 +582,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535771897235</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="detail first step apply">
+      <created>1535808232897</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1535808232897</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -635,20 +599,20 @@
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19270833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37254903" sideWeight="0.50595236" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19444445" sideWeight="0.4940476" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.04248366" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.110929854" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1990212" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23039216" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1990212" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -677,7 +641,8 @@
     <MESSAGE value="esd website interface test" />
     <MESSAGE value="add name config and generate name" />
     <MESSAGE value="add main.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="add main.py" />
+    <MESSAGE value="detail first step apply" />
+    <option name="LAST_COMMIT_MESSAGE" value="detail first step apply" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -700,6 +665,47 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/datas/detailfirststep.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+          <folding>
+            <element signature="e#247#272#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/esdwebsite/accessutil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+          <folding>
+            <element signature="e#17#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python/Python37/Lib/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6723">
+          <caret line="258" column="0" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1485">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python/Python37/Lib/site-packages/requests/sessions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9828">
+          <caret line="388" column="18" selection-start-line="388" selection-start-column="11" selection-end-line="388" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/esdwebsite/detailfirststep.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -724,7 +730,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22032">
           <caret line="817" column="0" selection-start-line="817" selection-start-column="0" selection-end-line="817" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -732,7 +737,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9126">
           <caret line="340" column="0" selection-start-line="340" selection-start-column="0" selection-end-line="340" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -740,9 +744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="e#18#59#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -768,9 +769,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#240#255#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -778,7 +776,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
           <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -796,7 +793,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -832,9 +828,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#240#255#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -842,7 +835,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -850,9 +842,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="e#49#58#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -860,7 +849,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
           <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -878,7 +866,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -900,7 +887,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -908,9 +894,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="e#49#58#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -932,7 +915,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -940,9 +922,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#240#255#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -950,7 +929,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
           <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -958,9 +936,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="e#18#59#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -968,7 +943,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9126">
           <caret line="340" column="0" selection-start-line="340" selection-start-column="0" selection-end-line="340" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -976,7 +950,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22032">
           <caret line="817" column="0" selection-start-line="817" selection-start-column="0" selection-end-line="817" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -984,7 +957,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -992,55 +964,57 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="239" column="78" selection-start-line="239" selection-start-column="76" selection-end-line="239" selection-end-column="78" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://D:/Python/Python37/Lib/random.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
+        <state relative-caret-position="6723">
           <caret line="258" column="0" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configs/ad09config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="36" column="47" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://D:/Python/Python37/Lib/site-packages/requests/structures.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
+        <state relative-caret-position="2241">
           <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://D:/Python/Python37/Lib/site-packages/requests/sessions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
+        <state relative-caret-position="9828">
           <caret line="388" column="18" selection-start-line="388" selection-start-column="11" selection-end-line="388" selection-end-column="18" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="31" column="21" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+        <state relative-caret-position="-459">
+          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/esdwebsite/access.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
           <folding>
-            <element signature="e#25#34#0" expanded="true" />
+            <element signature="e#18#27#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/esdwebsite/accessutil.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
+        <state relative-caret-position="594">
           <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
           <folding>
             <element signature="e#17#26#0" expanded="true" />
@@ -1050,7 +1024,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/datas/detailfirststep.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
+        <state relative-caret-position="648">
           <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
           <folding>
             <element signature="e#247#272#0" expanded="true" />
@@ -1060,31 +1034,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/esdwebsite/idcard.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="1" selection-end-line="67" selection-end-column="34" />
+        <state relative-caret-position="1647">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="2" selection-end-line="66" selection-end-column="20" />
           <folding>
             <element signature="e#255#264#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/esdwebsite/access.py">
+    <entry file="file://$PROJECT_DIR$/esdwebsite/detailfirststep.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="54" column="34" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="34" />
+        <state relative-caret-position="5562">
+          <caret line="211" column="0" selection-start-line="211" selection-start-column="1" selection-end-line="214" selection-end-column="32" />
           <folding>
-            <element signature="e#18#27#0" expanded="true" />
+            <element signature="e#18#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/esdwebsite/detailfirststep.py">
+    <entry file="file://$PROJECT_DIR$/esdwebsite/second_step_apply.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="89" column="67" selection-start-line="89" selection-start-column="52" selection-end-line="89" selection-end-column="67" />
+        <state relative-caret-position="1026">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
-            <element signature="e#18#29#0" expanded="true" />
+            <element signature="e#249#309#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configs/ad09config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="129" column="63" selection-start-line="129" selection-start-column="63" selection-end-line="129" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>

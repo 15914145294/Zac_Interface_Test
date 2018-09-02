@@ -16,7 +16,7 @@ from utils.HTMLTestRunner_PY3 import HTMLTestRunner
 from utils.constants import time_tag
 from logs.logUtil import logger
 from utils.mail import Email
-from utils.util import UtilMethod
+from utils.util import CommonMethods
 
 if __name__ == '__main__':
 	logger.info("-" * 40 + "测试开始" + "-" * 40)
@@ -38,7 +38,7 @@ if __name__ == '__main__':
 	log_path = os.path.join(LOG_PATH, "%stest.log" % time_tag)
 	accessory_list = [log_path, report]
 
-	report_html = UtilMethod.read_file(report)
+	report_html = CommonMethods.read_file(report)
 	# e = Email(title='接口测试报告',
 	#           receiver=mail_cf.get("EMAIL_RECEIVER"),
 	#           server=mail_cf.get("EMAIL_SERVER"),

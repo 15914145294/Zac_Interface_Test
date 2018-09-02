@@ -2,10 +2,13 @@
 
 import re
 import datetime
+import requests
+from random import choice
 from logs.logUtil import logger
+from configs.ad09config import BASE_URL
 
 
-class UtilMethod(object):
+class CommonMethods(object):
 	@staticmethod
 	def read_file(file_path="", encoding="utf-8"):
 		"""
@@ -57,7 +60,21 @@ class UtilMethod(object):
 		else:
 			raise ValueError("The pattern not matched data")
 
-			# if __name__ == '__main__':
-			# 	s = "/SalaryApply2?accessId=64ba0030-98ce-4db3-b5af-52cf111ad189&assignId=c4063653-a3cf-4632-9681-b6b37321922a&selectProductCode=Select_Product_Program_Web_Y&fromPage=ZaEsd-Ad09"
-			# 	p = r".*assignId=(.*)&selectProductCode.*"
-			# 	print(UtilMethod.search_regular_data(s,p))
+	@staticmethod
+	def get_area_childs(AreaId):
+		"""
+		根据省份ID 获取城市明细
+		:param AreaId:省份对应的AreaId 如广东
+		:return: 返回随机一个城市 如 深圳
+		"""
+		data = {"AreaId":AreaId}
+		r = requests.post(BASE_URL + "/service/getareachilds", data=data)
+		childs = r.json()
+		if childs:
+			value = choice(childs)["Value"]
+			return value
+		else:
+			return
+
+if __name__ == '__main__':
+	print(CommonMethods.get_area_childs("31b25d9c-912d-4db9-82ab-10d87a2885b3"))

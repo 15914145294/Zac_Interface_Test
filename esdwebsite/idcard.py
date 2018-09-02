@@ -61,8 +61,8 @@ def get_idard(age, gender):
 	id_number = make_idcard(int(area_code), age, gender)
 	return id_number
 #
-#
+
 # if __name__ == "__main__":
 # 	id_number = get_idard(22, 1)
 # 	print(id_number)
-# 	# print(is_id_card(id_number))
+	# print(is_id_card(id_number))
