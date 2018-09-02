@@ -136,7 +136,7 @@ third_step_param = {"__RequestVerificationToken": "",
                     "ContactInfo.ColleaguePosition": "测试",
                     "ContactInfo.ColleaguePhone": "",
                     "ContactInfo.OtherRelativesName": "",
-                    "ContactInfo.OtherRelativesRelation": "",
+                    "ContactInfo.OtherRelativesRelation": "远亲",
                     "ContactInfo.OtherRelativesPhone": "",
-                    "IsAcceptPact": "false"
+                    "IsAcceptPact": "True"
                     }

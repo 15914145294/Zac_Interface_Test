@@ -7,8 +7,9 @@
    date：          2018/9/2 0002
 -------------------------------------------------
 """
-from configs.ad09config import city_value, second_step_param
+from configs.ad09config import city_value, second_step_param, third_step_param
 from esdwebsite.detailfirststep import access
+from utils.util import CommonMethods
 from utils.util import CommonMethods
 from esdwebsite.detailfirststep import DetailApply
 from esdwebsite.detailfirststep import BASE_URL
@@ -22,7 +23,6 @@ class DetailApplySecond(object):
 
 	def apply4_2(self):
 		result = self.obj.post_SalaryApply2()
-		print(result)
 		url = BASE_URL + "/apply/apply4_2"
 		self.s.headers["Referer"] = url
 		pattern = 'name="__RequestVerificationToken".*value="(.*?)"\s?/><input'
@@ -39,11 +39,33 @@ class DetailApplySecond(object):
 		data["CompanyInfo.CityId"] = AreaId
 		# 设置地区
 		data["CompanyInfo.AreaId"] = token
+		print(data)
 		r = self.s.post(url, data=data)
 		return r.text
 
 	def apply4_3(self):
-		pass
+		result = self.apply4_2()
+		url = BASE_URL + "/apply/apply4_3"
+		self.s.headers["Referer"] = url
+		data = third_step_param
+		pattern = 'name="__RequestVerificationToken".*value="(.*)?"\s?/><input'
+		ProvinceId = city_value["广东"]
+		CityId = CommonMethods.get_area_childs(ProvinceId)
+		AreaId = CommonMethods.get_area_childs(CityId)
+		token = CommonMethods.search_regular_data(result, pattern)
+		data["__RequestVerificationToken"] = token
+		data["ContactInfo.RelativesName"] = self.obj.get_name()
+		data["ContactInfo.RelativesPhone"] = self.obj.get_mobile()
+		data["ContactInfo.RelativesProvinceId"] = ProvinceId
+		data["ContactInfo.RelativesCityId"] = CityId
+		data["ContactInfo.RelativesAreaId"] = AreaId
+		data["ContactInfo.ColleagueName"] = self.obj.get_name()
+		data["ContactInfo.ColleaguePhone"] = self.obj.get_mobile()
+		data["ContactInfo.OtherRelativesName"] = self.obj.get_name()
+		data["ContactInfo.OtherRelativesPhone"] = self.obj.get_mobile()
+		r = self.s.post(url, data=data,allow_redirects=False)
+		print(r.text)
+
 
 if __name__ == '__main__':
 	DetailApplySecond().apply4_2()
