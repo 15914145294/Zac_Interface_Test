@@ -9,7 +9,7 @@
 """
 from random import choice
 
-BASE_URL = "http://"
+BASE_URL = "http://uatweb.zac-esd.com"
 
 ESD_PRODUCTS = ["boss",
                 "boss_mt1",

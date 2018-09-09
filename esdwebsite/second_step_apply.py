@@ -115,7 +115,7 @@ class DetailApplySecond(object):
 		# >>> r = requests.post(url, files=multiple_files)
 		:return:
 		"""
-		data = {}
+		data =
 		session_id = self.RemindMessage()
 		self.s.headers["Content-Type"] = "multipart/form-data"
 		url = BASE_URL + "/Service/AddFile"
