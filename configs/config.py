@@ -24,6 +24,8 @@ FIRST_NAME =os.path.join(BASE_PATH, 'configs', 'first_names.json')
 # 姓的配置路径
 LAST_NAME = os.path.join(BASE_PATH, 'configs', 'last_names.json')
 BASE_URL="http://uatweb.zac-esd.com"
+# 图片路径
+PICTURE_PATH = os.path.join(BASE_PATH, 'picture')
 
 
 class Config(object):

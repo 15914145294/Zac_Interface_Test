@@ -23,6 +23,7 @@ class AccessApply(Ad09Util):
 		#
 		self.s.cookies.update(self.cookie)
 		self.mobile = self.get_mobile()
+		print(self.mobile)
 		self.path_dict = dict()
 
 		#

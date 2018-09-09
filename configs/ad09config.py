@@ -140,3 +140,20 @@ third_step_param = {"__RequestVerificationToken": "",
                     "ContactInfo.OtherRelativesPhone": "",
                     "IsAcceptPact": "True"
                     }
+
+upload_param = {
+	"Content-Disposition: form-data; name='Filename'": "02.jpg",
+	"Content-Disposition: form-data; name='code'": "1.1",
+	"Content-Disposition: form-data; name='ASPSESSIONID'": "kkpkghlk1uteybanh3gtlibx",
+	"Content-Disposition: form-data; name='Filedata'; filename='%s'": "<file>",
+	"Content-Type: application/octet-stream": "<file>",
+	"Content-Disposition: form-data; name='Upload'": "Submit Query"
+}
+
+upload_file_code = {
+	"身份证正面": "1.1",
+	"身份证反面": "1.1",
+	"授权委托书": "1.3",
+	"近四个月流水": "1.2",
+	"个人生活照": "1.4"
+}

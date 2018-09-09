@@ -204,6 +204,7 @@ class DetailApply(Ad09Util):
 		data["UserInfo.EducationEnum"] = choice(range(5))
 		data["UserInfo.QQNumber"] = self.qq
 		data["UserInfo.IDCard"] = self.idcard
+		print(self.idcard)
 		data["EstimateId"] = self.d["accessID"]
 		data["__RequestVerificationToken"] = result[1].strip('"')
 		r = self.s.post(url, data=data, allow_redirects=True)
