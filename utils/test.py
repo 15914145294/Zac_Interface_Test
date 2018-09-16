@@ -10,20 +10,16 @@
 import os
 from random import  choice
 from configs.config import PICTURE_PATH
-from configs.ad09config import upload_param
-data = {}
-keys = upload_param.keys()
-print(list(keys))
-for i in keys:
-	for key in keys:
-		if "Filename" in key:
-			data[key] = "02.jpg"
-		elif "code" in key:
-			data["key"] = "1.1"
-		elif "ASPSESSIONID" in key:
-			data[key] = "dfgdgdgd"
-		else:
-			data[key] = upload_param[key]
-print(data)
 
+def human(size:int):
+	units = ["","K","M","G","T"]
+	depth = 0
+	while size>=1024:
+		size = size // 1024
+		depth+=1
+	return "{}{}".format(size,units[depth])
 
+print(human(1024))
+print(human(1024000))
+print(human(102400000))
+print(human(10240000000))
