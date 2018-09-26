@@ -75,6 +75,35 @@ class CommonMethods(object):
 			return value
 		else:
 			return
+	@staticmethod
+    def get_city(AreaId):
+        """获取城市列表"""
+        d = dict()
+        data = {"AreaId": AreaId}
+        r = requests.post(BASE_URL + "/service/getareachilds", data=data)
+        childs = r.json()
+        """
+        [{
+	    'Key': '广州市',
+	    'Value': 'c1795c20-32fb-4b67-ae76-c6aab6e24a43'
+        }..
+        """
+        for i in childs:
+            d[i["Key"]] = i["Value"]
+        return d
+
+    def parse_json(file):
+        """
+        解析json文件
+        :param file: 文件路径
+        :return: 包含json document的dict
+        """
+        try:
+            fb = open(file, encoding="utf-8")
+        except:
+            raise ValueError("文件不存在")
+        d = json.load(fp=fb)
+        return d
 
 if __name__ == '__main__':
 	print(CommonMethods.get_area_childs("31b25d9c-912d-4db9-82ab-10d87a2885b3"))
