@@ -1,0 +1,37 @@
+{
+	"boss": {
+		"__RequestVerificationToken": "",
+		"ContactInfo.FromPage": "WebSite-ApplyBoss1",
+		"ContactInfo.RelativesName": "",
+		"ContactInfo.RelativesRelation": "兄弟",
+		"ContactInfo.RelativesPhone": "",
+		"ContactInfo.RelativesCompanyName": "深圳有限公司",
+		"ContactInfo.OtherRelativesName": "",
+		"ContactInfo.OtherRelativesRelation": "远亲",
+		"ContactInfo.OtherRelativesPhone": "",
+		"ContactInfo.BusinessPartner": "",
+		"ContactInfo.PartnerTitle": "",
+		"ContactInfo.PartnerMobile": "",
+		"IsAcceptPact": "true",
+		"IsAcceptPact": "false"
+	},
+	"non_boss": {
+		"__RequestVerificationToken": "",
+		"ContactInfo.FromPage": "WebSite-Apply4",
+		"ContactInfo.RelativesName": "",
+		"ContactInfo.RelativesRelation": "兄弟",
+		"ContactInfo.RelativesPhone": "",
+		"ContactInfo.RelativesCompanyName": "深圳有限公司",
+		"ContactInfo.RelativesProvinceId": "",
+		"ContactInfo.RelativesCityId": "",
+		"ContactInfo.RelativesAreaId": "",
+		"ContactInfo.RelativesAddress": "车公庙",
+		"ContactInfo.ColleagueName": "",
+		"ContactInfo.ColleaguePosition": "测试",
+		"ContactInfo.ColleaguePhone": "",
+		"ContactInfo.OtherRelativesName": "",
+		"ContactInfo.OtherRelativesRelation": "远亲",
+		"ContactInfo.OtherRelativesPhone": "",
+		"IsAcceptPact": "True"
+	}
+}
