@@ -1,0 +1,38 @@
+{
+  "boss": {
+    "OccupationTypes": 1,
+    "BusinessType": 1,
+    "HasLicense": "true",
+    "LicenseYear": 2014,
+    "LicenseMonth": 1,
+    "BusinessTime": "2012-1-1",
+    "AnnualSales": 100,
+    "StockPercent": 1,
+    "BranchHouseProperty": 0,
+    "MortgageTime": 3,
+    "FromPage": "ZaEsd-Ad09-",
+    "CustomerId": "",
+    "EstimateAreaType": 6,
+    "ProductType": "all",
+    "ChannelType": "PC",
+    "__RequestVerificationToken": ""
+  },
+  "non_boss": {
+    "OccupationTypes": 0,
+    "EntryYear": 2015,
+    "EntryMonth": 1,
+    "PayoffTypes": 0,
+    "BankPayoff": 5000,
+    "SheBao": 0,
+    "HousingFund": 0,
+    "BranchOtherInsurance": 3,
+    "BranchHouseProperty": 0,
+    "MortgageTime": 3,
+    "FromPage": "ZaEsd-Ad09-",
+    "CustomerId": "",
+    "EstimateAreaType": 6,
+    "ProductType": "all",
+    "ChannelType": "PC",
+    "__RequestVerificationToken": ""
+  }
+}
