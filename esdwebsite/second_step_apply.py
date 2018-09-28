@@ -1,202 +1,240 @@
-# -*- coding: utf-8 -*-
-"""
--------------------------------------------------
-   File Name：     second_step_apply
-   Description :
-   Author :       Administrator
-   date：          2018/9/2 0002
--------------------------------------------------
-"""
+# encoding:utf-8
+
 import os
-import random
-import string
+import collections
 from random import choice
-from configs.config import PICTURE_PATH, BASE_API
-from utils.util import CommonMethods
-from utils.infoitem import InfoItems
-from esdwebsite.detailfirststep import DetailApply
-from esdwebsite.detailfirststep import BASE_URL
-from requests_toolbelt.multipart import MultipartEncoder
-from configs.ad09config import city_value, second_step_param, third_step_param, upload_param
+from utils.data import ConfigDatautil
+from utils.fileutil import CommonMethods
+from esdwebsite.idcard import get_idard
+from configs.ad09config import first_step_param, check_state
+from esdwebsite.access import AccessApply
+from configs.config import BASE_URL, CONFIG_PATH
+from esdwebsite.costomparser import get_products
+from esdwebsite.accessutil import Ad09Util
+
+access = AccessApply()
+# 选择产品的url
+# Referer: http://uatweb.zac-esd.com/Apply/SelectProduct?accessId=1f3a403e-fba6-4c90-9463-2aa6ea38f374&frompage=ZaEsd-Ad09-
+result = access.SelectProduct()
+referer = BASE_URL + result[1]["location"]
 
 
-class DetailApplySecond(object):
+class ApplyFirstStep(Ad09Util,ConfigDatautil):
     def __init__(self):
-        self.obj = DetailApply()
-        self.s = self.obj.s
-        self.n = "".join(map(lambda x: random.choice(string.digits), range(13)))
+        Ad09Util.__init__(self, "%s/ad09" % BASE_URL)
+        self.d = collections.OrderedDict()
+        self.a = access
+        self.name = self.a.name
+        # self.s = access.obj[1]
+        self.get_access_id()
+        self.idcard = get_idard(26, 1)
+        self.email = self.get_email()
+        self.qq = self.get_QQNumber()
+        self.s.cookies.update(access.cookie)
 
-    def apply4_2(self):
-        result = self.obj.post_SalaryApply2()
-        url = BASE_URL + "/apply/apply4_2"
-        self.s.headers["Referer"] = url
-        pattern = 'name="__RequestVerificationToken".*value="(.*?)"\s?/><input'
-        token = CommonMethods.search_regular_data(result, pattern)
-        data = second_step_param
-        ProvinceId = city_value["广东"]
-        CityId = CommonMethods.get_area_childs(ProvinceId)
-        AreaId = CommonMethods.get_area_childs(CityId)
-        # 设置token'
-        data["__RequestVerificationToken"] = token
-        # 设置省份
-        data["CompanyInfo.ProvinceId"] = ProvinceId
-        # 设置城市
-        data["CompanyInfo.CityId"] = CityId
-        # 设置地区
-        data["CompanyInfo.AreaId"] = AreaId
+    def get_access_id(self):
+        # path_dict = self.a.EntranceAssign()
+        # if isinstance(path_dict, dict):
+        self.d['accessID'] = result[1]["accessid"]
+        self.d['fromPage'] = result[1]["frompage"]
+        return True
+
+    @property
+    def match_products(self):
+        # 选择产品返回的html页面
+        html = result[0]
+        MATCHED_PRODUICT = get_products(html)
+        if MATCHED_PRODUICT:
+            return MATCHED_PRODUICT
+        else:
+            return None
+
+    def confirm_product(self):
+        """
+        确认产品，产品类型用于后续的渠道确认
+        :return: 返回Location，详细申请第一步
+        """
+        self.get_access_id()
+        product = self.getProductType["ProductType"]
+        p = {"productType": product}
+        # self.path_dict.update(productType="salary")
+        param = {**self.d, **p}
+        assert product in self.match_products, "The product not matched"
+
+        url = BASE_URL + "/Apply/ComfirmProduct"
+        self.s.headers["Referer"] = referer
+        r = self.s.get(url, params=param, allow_redirects=False)
+        # print(self.s.cookies, 0)
+        # print(self.s.cookies)
+        return r.headers["Location"]
+
+    def SelectChannel(self):
+        """
+        选择产品渠道，线上，线下
+        :return:
+        """
+        path = self.confirm_product()
+        url = BASE_URL + path
+        # self.s.headers["Referer"]=
+        r = self.s.get(url, allow_redirects=False)
+        # print(self.s.cookies, 1)
+        try:
+            return (url, r.text)
+        except:
+            return (r.text)
+
+    def ComfirmChannel(self):
+        """
+        确认渠道
+        :return:
+        """
+        # /Apply/ComfirmChannel?accessId=f4ea63d4-d849-4afd-99d4-274f06a463a9&channel=esd&fromPage=ZaEsd-Ad09
+        self.s.headers["Referer"] = BASE_URL + self.confirm_product()
+        url = BASE_URL + "/Apply/ComfirmChannel"
+        p = {"channel": "esd"}
+        param = {**self.d, **p}
+        r = self.s.get(url, params=param, allow_redirects=False)
+        return r.headers["Location"]
+
+    def apply_index(self):
+        """
+        详细申请第一步页面
+        :param product: 产品类型，必须为符合的评估符合的产品
+        :return: 返回Location
+        """
+        self.s.headers["Referer"] = BASE_URL + self.confirm_product()
+        url = BASE_URL + self.ComfirmChannel()
+        # self.s.headers["Referer"]=access.product_referer
+        r = self.s.get(url, allow_redirects=False)
+        # print(self.s.cookies, 2)
+        return r.headers["Location"]
+
+    def Entrance_Assign(self):
+        self.s.headers["Referer"] = BASE_URL + self.confirm_product()
+        url = BASE_URL + self.apply_index()
+        r = self.s.get(url, params=self.d, allow_redirects=False)
+        try:
+            return r.headers["Location"]
+        except:
+            return r.text
+
+    def getProductApply2(self):
+        self.s.headers["Referer"] = referer
+        url = BASE_URL + self.Entrance_Assign()
+        p = ".*assignId=(.*)&selectProductCode.*"
+        p2 = 'name="__RequestVerificationToken" type="hidden" value=(.*)?"? /><input id="FromPage"'
+        assignId = CommonMethods.search_regular_data(url, p)
+        self.s.headers["Referer"] = referer
+        # /SalaryApply2?accessId=e420c18f-21ec-405f-89c6-27f9954cb950&assignId=
+        # dcb61391-c898-47b3-a108-cc848898d524&selectProductCode=Select_Product_Program_Web_Y
+        # &fromPage=ZaEsd-Ad09
+        r = self.s.get(url)
+        text = r.text
+        assert "__RequestVerificationToken" in text
+        token = CommonMethods.search_regular_data(text, p2)
+        return [assignId, token, url]
+
+    def GetVoiceServicePhone(self):
+        url = BASE_URL + "/Service/GetVoiceServicePhone"
+        referer = BASE_URL + self.Entrance_Assign()
+        self.s.headers["Referer"] = referer
+        r = self.s.get(url)
+        result = r.json()
+        assert result["ResponseDetails"] == "ok"
+        return r.json()
+
+    def GetCountDownTime(self):
+        url = BASE_URL + "/Service/GetCountDownTime"
+        referer = BASE_URL + self.Entrance_Assign()
+        self.s.headers["Referer"] = referer
+        r = self.s.get(url)
+        result = r.json()
+        assert result["ResponseDetails"] == "ok"
+        return r.json()
+
+    def ValidAccountUnique(self, idcard):
+        """
+        检查身份证/邮箱是否唯一
+        :param idcard: 身份证
+        :return:
+        """
+        data = {"IDCard": idcard}
+        url = BASE_URL + "/Validate/ValidAccountUnique"
         r = self.s.post(url, data=data)
-        return r.text
+        assert len(r.json()) == 0
+        return r.json()
 
-    def apply4_3(self):
-        result = self.apply4_2()
-        url = BASE_URL + "/apply/apply4_3"
-        self.s.headers["Referer"] = url
-        data = third_step_param
-        pattern = 'name="__RequestVerificationToken".*value="(.*)?"\s?/><input'
-        ProvinceId = city_value["广东"]
+    def CheckApplyState(self, data=check_state):
+        """
+        检查申请状态
+        :param data: 身份证，手机号，密码的dict
+        :return:
+        """
+        result = self.getProductApply2()
+        self.s.headers["Referer"] = result[-1]
+        if not isinstance(data, dict):
+            raise TypeError("Data msut be dict")
+        assert "mobilePhone" in data and "password" in data and "idCard" in data
+        data["mobilePhone"] = access.mobile
+        data["idCard"] = self.idcard
+        url = BASE_URL + "/apply/CheckApplyState"
+        r = self.s.post(url, data=data)
+        try:
+            cookie = r.cookies.get_dict()
+            result.append(cookie)
+            assert r.json()["Code"] == 0, "申请单状态错误"
+            return result
+        except:
+            return r.text
+
+    def postProductApply2(self):
+        """
+        生意贷与非生意贷所掉接口不一致
+        生意贷:BossApply2
+        非生意贷：BossApply2
+        详细申请第一步提交
+        :return:
+        """
+        # [assignId, token,url]
+        data = {}
+        product_type = self.getProductType["ProductType"]
+        result = self.CheckApplyState()
+        # 设置referer
+        # self.s.headers["Referer"] = result[2]
+        # 更新cookie 因为检查申请单状态时会更新cookie
+        # self.s.cookies.update(result[-1])
+        # the first_step.json path
+        path = "SalaryApply2"
+        json_path = os.path.join(CONFIG_PATH, "first_step.json")
+        if not str(product_type).startswith("boss"):
+            data = CommonMethods.parse_json(json_path)["non_boss"]
+        else:
+            data = CommonMethods.parse_json(json_path)["boss"]
+            path = "BossApply2"
+        url = BASE_URL + "/{}?assignid={}".format(path, result[0])
+        data["AccountInfo.MobilePhone"] = access.mobile
+        data["AccountInfo.Email"] = self.email
+        data["UserInfo.Name"] = access.name
+        data["ApplyProduct"] = product_type
+        data["UserInfo.EducationEnum"] = choice(range(5))
+        data["UserInfo.QQNumber"] = self.qq
+        data["UserInfo.IDCard"] = self.idcard
+        # 获取省份guid
+        ProvinceId = CommonMethods.parse_json(os.path.join(CONFIG_PATH, "city.json"))["广东"]
+        # 根据省份guid 获取对应城市guid
         CityId = CommonMethods.get_area_childs(ProvinceId)
+        # 根据城市guid 获取区/县标识
         AreaId = CommonMethods.get_area_childs(CityId)
-        token = CommonMethods.search_regular_data(result, pattern)
-        data["__RequestVerificationToken"] = token
-        data["ContactInfo.RelativesName"] = self.obj.get_name()
-        data["ContactInfo.RelativesPhone"] = self.obj.get_mobile()
-        data["ContactInfo.RelativesProvinceId"] = ProvinceId
-        data["ContactInfo.RelativesCityId"] = CityId
-        data["ContactInfo.RelativesAreaId"] = AreaId
-        data["ContactInfo.ColleagueName"] = self.obj.get_name()
-        data["ContactInfo.ColleaguePhone"] = self.obj.get_mobile()
-        data["ContactInfo.OtherRelativesName"] = self.obj.get_name()
-        data["ContactInfo.OtherRelativesPhone"] = self.obj.get_mobile()
-        r = self.s.post(url, data=data, allow_redirects=False)
+        data["UserInfo.ProvinceId"] = ProvinceId
+        data["UserInfo.CityId"] = CityId
+        data["UserInfo.AreaId"] = AreaId
+        print(self.idcard)
+        data["EstimateId"] = self.d["accessID"]
+        data["__RequestVerificationToken"] = result[1].strip('"')
+        r = self.s.post(url, data=data, allow_redirects=True)
         return r.text
 
-    def apply_finish(self):
-        self.apply4_3()
-        self.s.headers["Referer"] = "{0}{1}".format(BASE_URL, "/apply/apply4_3")
-        req = self.s.get("{0}{1}".format(BASE_URL, "/apply/finish"), allow_redirects=False)
-        assert "/apply/Audit" in req.text
-        return req.headers["Location"]
 
-    def apply_audit(self):
-        self.s.headers["Referer"] = "{baseusrl}{path}".format(baseusrl=BASE_URL, path=self.apply_finish())
-        r = self.s.get("%s/apply/Audit" % BASE_URL)
-        assert "系统正在审核您的贷款申请，请稍候" in r.text
-        return True
-
-    def AuditWait(self):
-        if self.apply_audit():
-            self.s.headers["Referer"] = "%s/apply/Audit" % BASE_URL
-            r = self.s.post(BASE_URL + "/apply/AuditWait")
-            try:
-                assert r.json()["ResponseDetails"] == "ok", "审核异常"
-                return True
-            except:
-                return False
-
-    def member(self):
-        result=self.AuditWait()
-        if not result:
-            return False
-        self.s.headers["Referer"] = "%s/apply/Audit" % BASE_URL
-        r = self.s.get("%s/member" % BASE_URL)
-        assert "PC会员说明" in r.text
-        info_items = InfoItems(r.text).parser_code()
-        return info_items
-
-    # def GetInfoItems(self):
-    #     result = self.member()
-    #     self.s.headers["Authorization"] = "Bearer buLeqCMjUZweS8wBSV8C4gCSZ06UeF7dErH_VYuF" \
-    #                                       "xuNthWTsi8opr0pjVxIe6-AgVuS6xGQ86Z04rm80ELIy" \
-    #                                       "WICdafRUCXU9f6ph_Wk1L76dpIgdrkHfAvdbSRGVvONmBt" \
-    #                                       "YDzyquVOE1ORfq1hQZNo99RN_RicCYvyNhklm1RdOplUZRIi" \
-    #                                       "6QkEkaKoeZEpr0k3imnZ3qQJUJXn0qhJQb17KtpYZMSWf" \
-    #                                       "UNR0bP1xLBgDXiJ-YM1eVj0dGb6nmP7yuEb7HtA"
-    #     url = BASE_API + "/api/v2/Information/GetInfoItems"
-    #     r = self.s.get(url)
-    #     print(r.text)
-
-    def RemindMessage(self):
-        items=self.member()
-        self.s.headers["Referer"] = "%s/member" % BASE_URL
-        r = self.s.post("%s/account/RemindMessage" % BASE_URL)
-        assert r.json()["Status"] == 0
-        session_id = self.s.cookies.get_dict()["ASP.NET_SessionId"]
-        return session_id, items
-
-    # POST /Information/UploadDialog?code=1.1&random=1537325899379
-    def UploadDialog(self):
-        result = self.RemindMessage()
-        code = choice(list(result[1].values()))
-        number = self.n
-        data = {}
-        data["code"] = code
-        data["random"] = number
-        r = self.s.post(BASE_URL + "/Information/UploadDialog", params=data)
-        assert "请确保信息的真实性" in r.text
-        return result
-
-    # /Tools/uploadify/uploadify.swf
-    def uploadify(self):
-        params = {"preventswfcaching": self.n}
-        if self.UploadDialog():
-            r = self.s.get(BASE_URL + "/Tools/uploadify/uploadify.swf", params=params)
-        return r.text.encode("utf-8").decode("utf-8")
-
-    def parse_upload_information(self):
-        """
-        <td class="name">
-            <span class="red">*</span>
-            <span style="margin-left: 10px;">授权委托书</span>
-            <a href="javascript:void(0);" style="color: #E87B26; text-decoration: none;" onclick="ajaxLoadHtml(this,
-             '/Information/UploadDesc?code=1.3');">资料要求</a>
-        1)找出所有需要上传的资料项
-        2）解析a标签中的code
-        3）解析资料项，获取资料项名称
-        4）将资料项及code组合成对应的字典
-        :return:
-        """
-        pass
-
-    def upload_file(self):
-        """
-        # >>> url = 'http://httpbin.org/post'
-        # >>> multiple_files = [
-        # ('images', ('foo.png', open('foo.png', 'rb'), 'image/png')),
-        # ('images', ('bar.png', open('bar.png', 'rb'), 'image/png'))]
-        # >>> r = requests.post(url, files=multiple_files)
-        :return:
-        """
-        """
-        1)找出所有需要上传的资料项
-        2)循环上传所有的资料
-        """
-        url = BASE_URL + "/Service/AddFile"
-        data = {}
-        files = os.listdir(PICTURE_PATH)
-        filename = choice(files)
-        file_path = os.path.join(PICTURE_PATH, filename)
-        ret = self.UploadDialog()
-        for code in list(ret[1].values()):
-            multipart_encoder = MultipartEncoder(
-                fields={
-                    "Filename": filename,
-                    # "code": choice(list(upload_file_code.values())),
-                    "code": code,
-                    "ASPSESSIONID": ret[0],
-                    "Filedata": (filename, open(file_path, 'rb'), 'application/octet-stream')
-                },
-                boundary="------------------------" + str(random.randint(1e28, 1e29 - 1)),
-                encoding='utf-8'
-            )
-            self.s.headers["Content-Type"] = multipart_encoder.content_type
-            r = self.s.post(url, data=multipart_encoder, )
-            results = r.json()
-            if results["ResponseDetails"] == "ok":
-                continue
-            else:
-                raise AssertionError("上传图片出现异常")
-        return True
-
-
-if __name__ == '__main__':
-    print(DetailApplySecond().upload_file())
+# if __name__ == '__main__':
+#     o = ApplyFirstStep()
+#     print(o.postProductApply2())
