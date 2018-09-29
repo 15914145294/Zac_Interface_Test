@@ -7,9 +7,11 @@
 import os
 import random
 import string
+from utils.logUtil import logger
 from utils.dictionary import DictUtil
+from utils.decoration import decorator
 from requests_toolbelt.multipart import MultipartEncoder
-from configs.config import BASE_URL, CONFIG_PATH,VIDEO_PATH
+from configs.config import BASE_URL, CONFIG_PATH, VIDEO_PATH
 from esdwebsite.detailapply import DetailApply
 from utils.fileutil import CommonMethods
 
@@ -18,6 +20,7 @@ class Bank(object):
     def __init__(self):
         self.obj = DetailApply()
         self.s = self.obj.s
+        self.logger = logger
 
     def getBankCode(self):
         """
@@ -28,6 +31,7 @@ class Bank(object):
         suffix = "".join(map(lambda x: random.choice(string.digits), range(12)))
         return int(prefix + suffix)
 
+    @decorator
     def bind_bank(self):
         """
         详细申请三步提交后，绑定银行卡
@@ -61,16 +65,18 @@ class Bank(object):
         data["CityId"] = CityId
         data["BankAccount"] = bank_account
         data["BankLocation"] = "{}省 {}".format(ProvinceName, CityName)
-        self.s.headers["Referer"]=BASE_URL+"/member"
-        r = self.s.post(BASE_URL + "/BankCard/Bind", data=data,allow_redirects=False)
-        session=self.s.cookies.get_dict()["ASP.NET_SessionId"]
+        self.logger.info("请求参数是%s"%str(data))
+        self.s.headers["Referer"] = BASE_URL + "/member"
+        r = self.s.post(BASE_URL + "/BankCard/Bind", data=data, allow_redirects=False)
+        session = self.s.cookies.get_dict()["ASP.NET_SessionId"]
         assert r"/member" in r.text
         return session
 
+    @decorator
     def videoUpload(self):
         # get the video path
         session_id = self.bind_bank()
-        path = os.path.join(VIDEO_PATH,"test_video.mp4")
+        path = os.path.join(VIDEO_PATH, "test_video.mp4")
         multipart_encoder = MultipartEncoder(
             fields={
                 "Filename": "test_video.mp4",
@@ -82,10 +88,10 @@ class Bank(object):
             encoding='utf-8'
         )
         self.s.headers["Content-Type"] = multipart_encoder.content_type
-        r = self.s.post(BASE_URL+"/Video/VideoUploadService", data=multipart_encoder, )
+        r = self.s.post(BASE_URL + "/Video/VideoUploadService", data=multipart_encoder, )
         assert "ok" in r.text
         return True
 
 
 if __name__ == "__main__":
-    print(Bank().videoUpload())
+    print(Bank().bind_bank())
