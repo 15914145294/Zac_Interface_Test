@@ -11,6 +11,7 @@ import os
 import random
 import string
 from random import choice
+from utils.decoration import decorator
 from utils.data import ConfigDatautil
 from configs.config import PICTURE_PATH
 from utils.fileutil import CommonMethods
@@ -18,7 +19,6 @@ from utils.items import InfoItems
 from esdwebsite.detailfirststep import ApplyFirstStep
 from configs.config import BASE_URL, CONFIG_PATH
 from requests_toolbelt.multipart import MultipartEncoder
-from configs.ad09config import second_step_param, third_step_param, upload_param
 
 
 class DetailApply(ConfigDatautil):
@@ -29,6 +29,7 @@ class DetailApply(ConfigDatautil):
         self.name = self.obj.name
         self.n = "".join(map(lambda x: random.choice(string.digits), range(13)))
 
+    @decorator
     def getParamStructure(self, config_name):
         d = {}
         product_type = self.getProductType["ProductType"]
@@ -62,6 +63,7 @@ class DetailApply(ConfigDatautil):
         d["OccupationTypes"] = occupationtypes
         return d
 
+    @decorator
     def apply4_2(self):
         """
         详细申请第二步
@@ -104,10 +106,10 @@ class DetailApply(ConfigDatautil):
         data["CompanyInfo.CityId"] = CityId
         # 设置地区
         data["CompanyInfo.AreaId"] = AreaId
-        # print(data)
         r = self.s.post(url, data=data)
         return r.text
 
+    @decorator
     def apply4_3(self):
         """
         详细申请第三步：联系人资料
@@ -142,10 +144,10 @@ class DetailApply(ConfigDatautil):
             data["ContactInfo.ColleaguePhone"] = self.obj.get_mobile()
         data["ContactInfo.OtherRelativesName"] = self.obj.get_name()
         data["ContactInfo.OtherRelativesPhone"] = self.obj.get_mobile()
-        # print(data)
         r = self.s.post(url, data=data, allow_redirects=False)
         return r.text
 
+    @decorator
     def apply_finish(self):
         self.apply4_3()
         self.s.headers["Referer"] = "{0}{1}".format(BASE_URL, "/apply/%s")\
@@ -154,12 +156,14 @@ class DetailApply(ConfigDatautil):
         assert "/apply/Audit" in req.text
         return req.headers["Location"]
 
+    @decorator
     def apply_audit(self):
         self.s.headers["Referer"] = "{baseusrl}{path}".format(baseusrl=BASE_URL, path=self.apply_finish())
         r = self.s.get("%s/apply/Audit" % BASE_URL)
         assert "系统正在审核您的贷款申请，请稍候" in r.text
         return True
 
+    @decorator
     def AuditWait(self):
         if self.apply_audit():
             self.s.headers["Referer"] = "%s/apply/Audit" % BASE_URL
@@ -170,6 +174,7 @@ class DetailApply(ConfigDatautil):
             except:
                 return False
 
+    @decorator
     def member(self):
         """
         获取请求结果，并将返回的页面解析，获取需要上传的资料项
@@ -199,8 +204,7 @@ class DetailApply(ConfigDatautil):
     #                                       "UNR0bP1xLBgDXiJ-YM1eVj0dGb6nmP7yuEb7HtA"
     #     url = BASE_API + "/api/v2/Information/GetInfoItems"
     #     r = self.s.get(url)
-    #     print(r.text)
-
+    @decorator
     def RemindMessage(self):
         # ret is a dict:{"items":info_items,"token":token}
         ret = self.member()
@@ -213,6 +217,7 @@ class DetailApply(ConfigDatautil):
 
         # POST /Information/UploadDialog?code=1.1&random=1537325899379
 
+    @decorator
     def UploadDialog(self):
         ret = self.RemindMessage()
         code = choice(list(ret["items"].values()))
@@ -225,12 +230,14 @@ class DetailApply(ConfigDatautil):
         return ret
 
     # /Tools/uploadify/uploadify.swf
+    @decorator
     def uploadify(self):
         params = {"preventswfcaching": self.n}
         if self.UploadDialog():
             r = self.s.get(BASE_URL + "/Tools/uploadify/uploadify.swf", params=params)
         return r.text.encode("utf-8").decode("utf-8")
 
+    @decorator
     def parse_upload_information(self):
         """
         <td class="name">
@@ -246,6 +253,7 @@ class DetailApply(ConfigDatautil):
         """
         pass
 
+    @decorator
     def upload_files(self):
         """
         # >>> url = 'http://httpbin.org/post'
@@ -288,6 +296,7 @@ class DetailApply(ConfigDatautil):
                 raise AssertionError("上传图片出现异常")
         return ret
 
+    @decorator
     def UpLoadCompleted(self):
         """
         上传资料后，进行资料项提交
