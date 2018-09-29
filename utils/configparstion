@@ -1,0 +1,39 @@
+# -*- coding:utf-8 _*-
+"""
+@author:Administrator
+@file: yamlparser.py
+@time: 2018/09/07
+"""
+import sys
+
+
+def setEnv(yml_path, env):
+    """
+    修改激活配置
+    :param yml_path: 配置文件路径
+    :param env: 发布环境
+    :return:
+    """
+    file_data = ""
+    try:
+        with open(yml_path, "r", encoding="utf-8") as f:
+            for line in f.readlines():
+                if line.strip().startswith("active") and env.__str__() not in line:
+                    line = line.replace(line.strip()[len("active:") + 1:], env)
+                    print(line)
+                elif "ASPNETCORE_ENVIRONMENT" in line and env.__str__() not in line:
+                    line = line.replace(line.strip().split("value")[-1].split('"')[1], env)
+                    print(line)
+                file_data += line
+
+        with open(yml_path, "w", encoding="utf-8") as f:
+            f.write(file_data)
+    except:
+        raise IOError("修改配置文件异常")
+
+    return True
+
+
+if __name__ == "__main__":
+    path = sys.argv[1]
+    setEnv(path,sys.argv[2])
