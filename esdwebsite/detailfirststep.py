@@ -3,10 +3,12 @@
 import os
 import collections
 from random import choice
+from utils.decoration import decorator
+from utils.logUtil import logger
 from utils.data import ConfigDatautil
 from utils.fileutil import CommonMethods
 from esdwebsite.idcard import get_idard
-from configs.ad09config import first_step_param, check_state
+from configs.ad09config import  check_state
 from esdwebsite.access import AccessApply
 from configs.config import BASE_URL, CONFIG_PATH
 from esdwebsite.costomparser import get_products
@@ -25,13 +27,14 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         self.d = collections.OrderedDict()
         self.a = access
         self.name = self.a.name
-        # self.s = access.obj[1]
+        self.logger = logger
         self.get_access_id()
         self.idcard = get_idard(26, 1)
         self.email = self.get_email()
         self.qq = self.get_QQNumber()
         self.s.cookies.update(access.cookie)
 
+    @decorator
     def get_access_id(self):
         # path_dict = self.a.EntranceAssign()
         # if isinstance(path_dict, dict):
@@ -49,6 +52,7 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         else:
             return None
 
+    @decorator
     def confirm_product(self):
         """
         确认产品，产品类型用于后续的渠道确认
@@ -64,10 +68,9 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         url = BASE_URL + "/Apply/ComfirmProduct"
         self.s.headers["Referer"] = referer
         r = self.s.get(url, params=param, allow_redirects=False)
-        # print(self.s.cookies, 0)
-        # print(self.s.cookies)
         return r.headers["Location"]
 
+    @decorator
     def SelectChannel(self):
         """
         选择产品渠道，线上，线下
@@ -77,12 +80,12 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         url = BASE_URL + path
         # self.s.headers["Referer"]=
         r = self.s.get(url, allow_redirects=False)
-        # print(self.s.cookies, 1)
         try:
             return (url, r.text)
         except:
             return (r.text)
 
+    @decorator
     def ComfirmChannel(self):
         """
         确认渠道
@@ -96,6 +99,7 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         r = self.s.get(url, params=param, allow_redirects=False)
         return r.headers["Location"]
 
+    @decorator
     def apply_index(self):
         """
         详细申请第一步页面
@@ -106,9 +110,9 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         url = BASE_URL + self.ComfirmChannel()
         # self.s.headers["Referer"]=access.product_referer
         r = self.s.get(url, allow_redirects=False)
-        # print(self.s.cookies, 2)
         return r.headers["Location"]
 
+    @decorator
     def Entrance_Assign(self):
         self.s.headers["Referer"] = BASE_URL + self.confirm_product()
         url = BASE_URL + self.apply_index()
@@ -134,6 +138,7 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         token = CommonMethods.search_regular_data(text, p2)
         return [assignId, token, url]
 
+    @decorator
     def GetVoiceServicePhone(self):
         url = BASE_URL + "/Service/GetVoiceServicePhone"
         referer = BASE_URL + self.Entrance_Assign()
@@ -143,6 +148,7 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         assert result["ResponseDetails"] == "ok"
         return r.json()
 
+    @decorator
     def GetCountDownTime(self):
         url = BASE_URL + "/Service/GetCountDownTime"
         referer = BASE_URL + self.Entrance_Assign()
@@ -152,6 +158,7 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         assert result["ResponseDetails"] == "ok"
         return r.json()
 
+    @decorator
     def ValidAccountUnique(self, idcard):
         """
         检查身份证/邮箱是否唯一
@@ -164,6 +171,7 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         assert len(r.json()) == 0
         return r.json()
 
+    @decorator
     def CheckApplyState(self, data=check_state):
         """
         检查申请状态
@@ -187,6 +195,7 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         except:
             return r.text
 
+    @decorator
     def postProductApply2(self):
         """
         生意贷与非生意贷所掉接口不一致
@@ -228,7 +237,7 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         data["UserInfo.ProvinceId"] = ProvinceId
         data["UserInfo.CityId"] = CityId
         data["UserInfo.AreaId"] = AreaId
-        print(self.idcard)
+        self.logger.info("身份证号码：%s",str(self.idcard))
         data["EstimateId"] = self.d["accessID"]
         data["__RequestVerificationToken"] = result[1].strip('"')
         r = self.s.post(url, data=data, allow_redirects=True)
