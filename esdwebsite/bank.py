@@ -6,17 +6,19 @@
 """
 import os
 import random
-import string
+import time
+import string, traceback
+from utils.DB import MysqlDb
 from utils.logUtil import logger
-from utils.dictionary import DictUtil
 from utils.decoration import decorator
+from utils.dictionary import DictUtil
+from utils.fileutil import CommonMethods
+from zac.esdwebsite.detailapply import DetailApply, customerinfo
 from requests_toolbelt.multipart import MultipartEncoder
 from configs.config import BASE_URL, CONFIG_PATH, VIDEO_PATH
-from esdwebsite.detailapply import DetailApply
-from utils.fileutil import CommonMethods
 
 
-class Bank(object):
+class BankVideo(object):
     def __init__(self):
         self.obj = DetailApply()
         self.s = self.obj.s
@@ -30,6 +32,23 @@ class Bank(object):
         prefix = "621666"
         suffix = "".join(map(lambda x: random.choice(string.digits), range(12)))
         return int(prefix + suffix)
+
+    def dump_customerinfo(self):
+        SQL = """INSERT into apply_info(id,mobile,idcard,customername,create_date) \
+               VALUES('%s','%s','%s','%s',str_to_date(\'%s\','%%Y-%%m-%%d %%H:%%i:%%s'))""" \
+              % (
+                  customerinfo.applyid, customerinfo.mobile,
+                  customerinfo.idcard, customerinfo.
+                      customername, customerinfo.create_date)
+        logger.info("sql is:%s" % SQL)
+        with MysqlDb() as db:
+            try:
+                db.execute(SQL)
+                return True
+            except:
+                error_message = traceback.format_exc()
+                logger.error(error_message)
+                return False
 
     @decorator
     def bind_bank(self):
@@ -65,14 +84,14 @@ class Bank(object):
         data["CityId"] = CityId
         data["BankAccount"] = bank_account
         data["BankLocation"] = "{}省 {}".format(ProvinceName, CityName)
-        self.logger.info("请求参数是%s"%str(data))
+        self.logger.info("请求参数是%s" % str(data))
         self.s.headers["Referer"] = BASE_URL + "/member"
         r = self.s.post(BASE_URL + "/BankCard/Bind", data=data, allow_redirects=False)
         session = self.s.cookies.get_dict()["ASP.NET_SessionId"]
         assert r"/member" in r.text
+        # self.dump_customerinfo()
         return session
 
-    @decorator
     def videoUpload(self):
         # get the video path
         session_id = self.bind_bank()
@@ -90,8 +109,9 @@ class Bank(object):
         self.s.headers["Content-Type"] = multipart_encoder.content_type
         r = self.s.post(BASE_URL + "/Video/VideoUploadService", data=multipart_encoder, )
         assert "ok" in r.text
+        self.dump_customerinfo()
         return True
 
 
 if __name__ == "__main__":
-    print(Bank().bind_bank())
+    print(BankVideo().videoUpload())
