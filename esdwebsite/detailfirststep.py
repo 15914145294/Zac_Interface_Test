@@ -1,18 +1,20 @@
 # encoding:utf-8
 
-import os
 import collections
+import os
 from random import choice
-from utils.decoration import decorator
-from utils.logUtil import logger
-from utils.data import ConfigDatautil
-from utils.fileutil import CommonMethods
-from esdwebsite.idcard import get_idard
+
+from zac.esdwebsite.access import AccessApply
+from zac.esdwebsite.accessutil import Ad09Util
+from zac.esdwebsite.costomparser import get_products
+from utils.customer import customerinfo
 from configs.ad09config import  check_state
-from esdwebsite.access import AccessApply
 from configs.config import BASE_URL, CONFIG_PATH
-from esdwebsite.costomparser import get_products
-from esdwebsite.accessutil import Ad09Util
+from zac.esdwebsite.idcard import get_idard
+from utils.data import CuctomerDatautil
+from utils.decoration import decorator
+from utils.fileutil import CommonMethods
+from utils.logUtil import logger
 
 access = AccessApply()
 # 选择产品的url
@@ -21,17 +23,17 @@ result = access.SelectProduct()
 referer = BASE_URL + result[1]["location"]
 
 
-class ApplyFirstStep(Ad09Util,ConfigDatautil):
+class ApplyFirstStep(Ad09Util, CuctomerDatautil):
     def __init__(self):
         Ad09Util.__init__(self, "%s/ad09" % BASE_URL)
         self.d = collections.OrderedDict()
         self.a = access
-        self.name = self.a.name
+        self.name = customerinfo.customername
         self.logger = logger
         self.get_access_id()
-        self.idcard = get_idard(26, 1)
-        self.email = self.get_email()
-        self.qq = self.get_QQNumber()
+        self.idcard = customerinfo.idcard
+        self.email = customerinfo.email
+        self.qq = customerinfo.qq
         self.s.cookies.update(access.cookie)
 
     @decorator
@@ -91,7 +93,7 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         确认渠道
         :return:
         """
-        # /Apply/ComfirmChannel?accessId=f4ea63d4-d849-4afd-99d4-274f06a463a9&channel=esd&fromPage=ZaEsd-Ad09
+        # /Apply/ComfirmChannel?accessId=f4ea63d4-d849-4afd-99d4-274f06a463a9&channel=zac&fromPage=ZaEsd-Ad09
         self.s.headers["Referer"] = BASE_URL + self.confirm_product()
         url = BASE_URL + "/Apply/ComfirmChannel"
         p = {"channel": "esd"}
@@ -134,6 +136,8 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
         # &fromPage=ZaEsd-Ad09
         r = self.s.get(url)
         text = r.text
+        print("="*50)
+        print(text)
         assert "__RequestVerificationToken" in text
         token = CommonMethods.search_regular_data(text, p2)
         return [assignId, token, url]
@@ -246,4 +250,4 @@ class ApplyFirstStep(Ad09Util,ConfigDatautil):
 
 # if __name__ == '__main__':
 #     o = ApplyFirstStep()
-#     print(o.postProductApply2())
+#     print(o.getProductApply2())
