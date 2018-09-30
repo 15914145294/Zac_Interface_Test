@@ -11,22 +11,23 @@ import os
 import random
 import string
 from random import choice
-from utils.decoration import decorator
-from utils.data import ConfigDatautil
+from utils.customer import customerinfo
+from requests_toolbelt.multipart import MultipartEncoder
+from configs.config import BASE_URL, CONFIG_PATH
 from configs.config import PICTURE_PATH
+from zac.esdwebsite.detailfirststep import ApplyFirstStep
+from utils.data import CuctomerDatautil
+from utils.decoration import decorator
 from utils.fileutil import CommonMethods
 from utils.items import InfoItems
-from esdwebsite.detailfirststep import ApplyFirstStep
-from configs.config import BASE_URL, CONFIG_PATH
-from requests_toolbelt.multipart import MultipartEncoder
 
 
-class DetailApply(ConfigDatautil):
+class DetailApply(CuctomerDatautil):
     def __init__(self):
         self.obj = ApplyFirstStep()
         self.s = self.obj.s
         # the user name
-        self.name = self.obj.name
+        self.name = customerinfo.customername
         self.n = "".join(map(lambda x: random.choice(string.digits), range(13)))
 
     @decorator
@@ -89,8 +90,9 @@ class DetailApply(ConfigDatautil):
         AreaId = CommonMethods.get_area_childs(CityId)
         # 获取申请单号
         p = r'.*ApplyId"\n?.*=(".*?")/>'
-        applyid = CommonMethods.search_regular_data(result, p)
+        applyid = CommonMethods.search_regular_data(result, p).strip('"')
         if applyid:
+            customerinfo.applyid=applyid
             data["EnterpriseInfo.ApplyId"] = applyid
             # 设置公司省份
             data["EnterpriseInfo.ProvinceId"] = ProvinceId
