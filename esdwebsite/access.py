@@ -1,32 +1,33 @@
 # encoding:utf-8
 
-import re
-import os
 import json
-from utils.decoration import decorator
-from utils.data import ConfigDatautil
-from utils.logUtil import logger
+import os
+import re
+
 from configs.config import BASE_URL
+from utils.customer import customerinfo
 from configs.config import CONFIG_PATH
+from zac.esdwebsite.accessutil import Ad09Util
+from utils.data import CuctomerDatautil
+from utils.decoration import decorator
 from utils.fileutil import CommonMethods
-from esdwebsite.accessutil import Ad09Util
+from utils.logUtil import logger
 
 
-class AccessApply(Ad09Util,ConfigDatautil):
+class AccessApply(Ad09Util, CuctomerDatautil):
     def __init__(self):
         """
         初始化session 并设置header和cookie
         """
         Ad09Util.__init__(self, "%s/ad09" % BASE_URL)
         self.logger = logger
-        # self.obj = self.init_session()
-        self.name = self.get_name()
+        self.name =customerinfo.customername
         self.cookie = self.result[0]
         #
         # update cookies
         #
         self.s.cookies.update(self.cookie)
-        self.mobile = self.get_mobile()
+        self.mobile = customerinfo.mobile
         self.logger.info("手机号码是:%s"%str(self.mobile))
         self.path_dict = dict()
 
