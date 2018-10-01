@@ -11,7 +11,7 @@ from utils.file_read import YamlReader
 
 class ConfigDatautil(object):
     def __init__(self):
-        object.__init__()
+        object.__init__(self)
 
     @property
     def getProductType(self):
