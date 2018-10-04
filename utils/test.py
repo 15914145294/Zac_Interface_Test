@@ -11,15 +11,12 @@ import os
 from random import  choice
 from configs.config import PICTURE_PATH
 
-def human(size:int):
-	units = ["","K","M","G","T"]
-	depth = 0
-	while size>=1024:
-		size = size // 1024
-		depth+=1
-	return "{}{}".format(size,units[depth])
+class Test(object):
+	def __init__(self):
+		print("__init__ test")
 
-print(human(1024))
-print(human(1024000))
-print(human(102400000))
-print(human(10240000000))
+	def __call__(self, *args, **kwargs):
+		print("__call__ test")
+
+t= Test()
+t()

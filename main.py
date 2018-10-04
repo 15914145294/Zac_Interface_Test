@@ -8,15 +8,13 @@
 -------------------------------------------------
 """
 
-import os
 import unittest
 
 from configs.config import *
 from utils.HTMLTestRunner_PY3 import HTMLTestRunner
 from utils.constants import time_tag
-from logs.logUtil import logger
-from utils.mail import Email
-from utils.util import CommonMethods
+from utils.fileutil import CommonMethods
+from utils.logUtil import logger
 
 if __name__ == '__main__':
 	logger.info("-" * 40 + "测试开始" + "-" * 40)

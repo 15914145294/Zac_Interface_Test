@@ -19,6 +19,8 @@ CONFIG_PATH = os.path.join(BASE_PATH, 'configs')
 REPORT_PATH = os.path.join(BASE_PATH, 'reports')
 # CASE路径
 CASE_PATH = os.path.join(BASE_PATH, 'testcases')
+# The path of Video
+VIDEO_PATH = os.path.join(BASE_PATH, 'video')
 # 名的配置路径
 FIRST_NAME =os.path.join(BASE_PATH, 'configs', 'first_names.json')
 # 姓的配置路径
@@ -26,6 +28,8 @@ LAST_NAME = os.path.join(BASE_PATH, 'configs', 'last_names.json')
 BASE_URL="http://uatweb.zac-esd.com"
 # 图片路径
 PICTURE_PATH = os.path.join(BASE_PATH, 'picture')
+# 数据库配置
+DB_NAME = {'user': 'root', 'password': '123456', 'port': '3306', 'host': 'localhost', 'database': 'test'}
 
 
 class Config(object):

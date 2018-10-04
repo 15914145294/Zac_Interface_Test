@@ -15,7 +15,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from socket import gaierror, error
 
-from logs.logUtil import logger
+from utils.logUtil import logger
 
 
 class Email:
