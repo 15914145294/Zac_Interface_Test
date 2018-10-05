@@ -3,23 +3,21 @@
 import json
 import os
 import re
-
-from configs.config import BASE_URL
+from configs.config import ConfigENum
 from utils.customer import customerinfo
-from configs.config import CONFIG_PATH
 from zac.esdwebsite.simpleapply import Ad09
-from utils.data import CuctomerDatautil
+from utils.data import ConfigDatautil
 from utils.decoration import decorator
 from utils.fileutil import CommonMethods
 from utils.logUtil import logger
 
 
-class AccessApply(Ad09, CuctomerDatautil):
+class AccessApply(Ad09, ConfigDatautil):
     def __init__(self):
         """
         初始化session 并设置header和cookie
         """
-        Ad09.__init__(self, "%s/ad09" % BASE_URL)
+        Ad09.__init__(self, "%s/ad09" % ConfigENum.BASE_URL.value)
         self.logger = logger
         self.name =customerinfo.customername
         self.cookie = self.result[0]
@@ -44,7 +42,7 @@ class AccessApply(Ad09, CuctomerDatautil):
         """
     @decorator
     def Ad09_index(self):
-        self.s.headers.update(Referer="%s/ad09" % BASE_URL)
+        self.s.headers.update(Referer="%s/ad09" % ConfigENum.BASE_URL.value)
         param = {"__RequestVerificationToken": self.get_token(self.get_cookies()[1]),
                  "FromPage": "ZaEsd-Ad09-",
                  "FromSE": "",
@@ -71,7 +69,7 @@ class AccessApply(Ad09, CuctomerDatautil):
     @decorator
     def getareachilds(self):
         # self.s = self.obj[1]
-        r = self.s.post("%s/service/getareachilds" % BASE_URL, allow_redirects=False)
+        r = self.s.post("%s/service/getareachilds" % ConfigENum.BASE_URL.value, allow_redirects=False)
         try:
             return r.json()
         except:
@@ -81,7 +79,7 @@ class AccessApply(Ad09, CuctomerDatautil):
     @decorator
     def GetLoanPurposeChilds(self):
         # self.s = self.obj[1]
-        r = self.s.post("%s/service/GetLoanPurposeChilds" % BASE_URL, allow_redirects=False)
+        r = self.s.post("%s/service/GetLoanPurposeChilds" % ConfigENum.BASE_URL.value, allow_redirects=False)
         try:
             return r.json()
         except:
@@ -95,7 +93,7 @@ class AccessApply(Ad09, CuctomerDatautil):
         self.Ad09_index()
         path = self.path_dict["location"]
         customer_id = path.__str__().split("&")[0].split("?")[1].split("=")[1]
-        url = BASE_URL + path
+        url = ConfigENum.BASE_URL.value + path
         d["url"] = url
         # self.s = self.obj[1]
         r = self.s.get(url)
@@ -113,6 +111,7 @@ class AccessApply(Ad09, CuctomerDatautil):
         :return:
         """
         product = self.getProductType["ProductType"]
+        BusinessType=None
         if product == "boss_online":
             BusinessType = 0
         elif product == "boss_store":
@@ -121,13 +120,13 @@ class AccessApply(Ad09, CuctomerDatautil):
         param = {}
         # 非生意人士
         if OccupationTypes == 0:
-            param = CommonMethods.parse_json(os.path.join(CONFIG_PATH, "access.json"))["non_boss"]
+            param = CommonMethods.parse_json(os.path.join(ConfigENum.CONFIG_PATH.value, "access.json"))["non_boss"]
         else:
             # 生意人士
-            param = CommonMethods.parse_json(os.path.join(CONFIG_PATH, "access.json"))["boss"]
+            param = CommonMethods.parse_json(os.path.join(ConfigENum.CONFIG_PATH.value, "access.json"))["boss"]
             param["BusinessType"] = BusinessType
         d = self.get_Estimate()
-        url = "%s/ad09/Estimate" % BASE_URL
+        url = "%s/ad09/Estimate" % ConfigENum.BASE_URL.value
         # obj = self.obj[0]
         # self.s = self.obj[1]
         self.s.headers.update(Referer=d["url"])
@@ -151,12 +150,12 @@ class AccessApply(Ad09, CuctomerDatautil):
         # location = self.Ad09_index()[0]
         # print (BASE_URL + location,"&&&&&")
         result = self.ad09_estimate()
-        self.s.headers['Referer'] = BASE_URL + self.path_dict["location"]
+        self.s.headers['Referer'] = ConfigENum.BASE_URL.value + self.path_dict["location"]
         path = None
         for key in dict(result).keys():
             if key.lower() == "url":
                 path = result[key]
-        url = BASE_URL + path
+        url = ConfigENum.BASE_URL.value + path
         # self.s = Ad09Util(url).s
         r = self.s.get(url, allow_redirects=False)
         location = r.headers["Location"]
@@ -188,7 +187,7 @@ class AccessApply(Ad09, CuctomerDatautil):
         """
         result = self.EntranceAssign()
         # print(self.s.headers)
-        url = BASE_URL + result["location"]
+        url = ConfigENum.BASE_URL.value + result["location"]
         self.s = Ad09(url).s
         r = self.s.get(url, allow_redirects=False)
         return (r.text, result)

@@ -5,7 +5,7 @@
 @time: 2018/09/28 
 """
 import os
-from configs.config import CONFIG_PATH
+from configs.config import ConfigENum
 from utils.file_read import YamlReader
 
 
@@ -21,7 +21,7 @@ class ConfigDatautil(object):
             {'OccupationTypes': 1, 'ProductType': 'boss_store'}
         :return:包含产品类型及用户身份的dict
         """
-        yml_path = os.path.join(CONFIG_PATH, "config.yml")
+        yml_path = os.path.join(ConfigENum.CONFIG_PATH.value, "config.yml")
         data = YamlReader(yml_path).data[0]["product"]
         return data
 
