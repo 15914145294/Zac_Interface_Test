@@ -5,7 +5,7 @@ import os
 from random import choice
 
 from zac.esdwebsite.access import AccessApply
-from zac.esdwebsite.simpleapply import Ad09Util
+from zac.esdwebsite.simpleapply import Ad09
 from zac.esdwebsite.costomparser import get_products
 from utils.customer import customerinfo
 from configs.ad09config import  check_state
@@ -23,9 +23,9 @@ result = access.SelectProduct()
 referer = BASE_URL + result[1]["location"]
 
 
-class ApplyFirstStep(Ad09Util, CuctomerDatautil):
+class ApplyFirstStep(Ad09, CuctomerDatautil):
     def __init__(self):
-        Ad09Util.__init__(self, "%s/ad09" % BASE_URL)
+        Ad09.__init__(self, "%s/ad09" % BASE_URL)
         self.d = collections.OrderedDict()
         self.a = access
         self.name = customerinfo.customername

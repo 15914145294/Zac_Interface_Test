@@ -7,19 +7,19 @@ import re
 from configs.config import BASE_URL
 from utils.customer import customerinfo
 from configs.config import CONFIG_PATH
-from zac.esdwebsite.simpleapply import Ad09Util
+from zac.esdwebsite.simpleapply import Ad09
 from utils.data import CuctomerDatautil
 from utils.decoration import decorator
 from utils.fileutil import CommonMethods
 from utils.logUtil import logger
 
 
-class AccessApply(Ad09Util, CuctomerDatautil):
+class AccessApply(Ad09, CuctomerDatautil):
     def __init__(self):
         """
         初始化session 并设置header和cookie
         """
-        Ad09Util.__init__(self, "%s/ad09" % BASE_URL)
+        Ad09.__init__(self, "%s/ad09" % BASE_URL)
         self.logger = logger
         self.name =customerinfo.customername
         self.cookie = self.result[0]
@@ -189,7 +189,7 @@ class AccessApply(Ad09Util, CuctomerDatautil):
         result = self.EntranceAssign()
         # print(self.s.headers)
         url = BASE_URL + result["location"]
-        self.s = Ad09Util(url).s
+        self.s = Ad09(url).s
         r = self.s.get(url, allow_redirects=False)
         return (r.text, result)
 

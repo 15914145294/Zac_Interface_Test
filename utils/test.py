@@ -7,9 +7,10 @@
    date：          2018/9/8 0008
 -------------------------------------------------
 """
-import os
-from random import  choice
+from requests.structures import CaseInsensitiveDict
 
-s = [1,[1,2,3],3]
-y = s.copy()
-print(y)
+cid = CaseInsensitiveDict()
+cid['Accept'] = 'application/json'
+print(cid['aCCEPT'] == 'application/json')  # True
+print(list(cid) == ['Accept'])
+

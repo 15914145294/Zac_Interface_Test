@@ -3,12 +3,25 @@ import re
 import json
 import random
 import string
+from requests.structures import CaseInsensitiveDict
 from utils.singleton import singleton
 from requests.sessions import Session
 from configs.config import ConfigENum
 
+__version__ = "2.19.1"
+
+
+def default_user_agent(name="python-requests"):
+	"""
+	Return a string representing the default user agent.
+
+	:rtype: str
+	"""
+	return '%s/%s' % (name, __version__)
+
+
 @singleton
-class Ad09Util(object):
+class Ad09(object):
 	def __init__(self, url):
 		"""
 			请求http://uatweb.zac-esd.com/ad09
@@ -22,9 +35,19 @@ class Ad09Util(object):
 		else:
 			self.url = url
 		self.s = Session()
-		self.s.headers.setdefault("Content_type", "application/x-www-form-urlencoded")
-		self.s.headers.update(Referer="%s/ad09" % ConfigENum.BASE_URL.value)
-		# self.s.cookies.update(self.get_cookies()[0])
+		self.s.headers = CaseInsensitiveDict(
+			{
+				'User-Agent': default_user_agent(),
+				'Accept-Encoding': ', '.join(('gzip', 'deflate')),
+				'Accept': '*/*',
+				'Connection': 'keep-alive',
+				"Content_type":"application/x-www-form-urlencoded",
+				"Referer":"%s/ad09" % ConfigENum.BASE_URL.value
+			}
+		)
+		# self.s.headers.setdefault("Content_type", "application/x-www-form-urlencoded")
+		# self.s.headers.update(Referer="%s/ad09" % ConfigENum.BASE_URL.value)
+		# # self.s.cookies.update(self.get_cookies()[0])
 		self.result = self.get_cookies()
 		self.req = self.result[1]
 
@@ -34,7 +57,6 @@ class Ad09Util(object):
 		:return: 返回cookie dict
 		"""
 		r = self.s.get(self.url)
-		# print(r.cookies.get_dict())
 		return (r.cookies, r.text)
 
 	def get_token(self, req):
@@ -80,9 +102,3 @@ class Ad09Util(object):
 	def get_QQNumber():
 		QQ = "".join(map(lambda x: random.choice(string.digits), range(8)))
 		return QQ
-
-
-if __name__ == '__main__':
-	url = "%s/ad09" % ConfigENum.BASE_URL.value
-	print(id(Ad09Util(url)))
-	print(id(Ad09Util(url)))
