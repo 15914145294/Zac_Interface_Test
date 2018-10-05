@@ -9,14 +9,7 @@
 """
 import os
 from random import  choice
-from configs.config import PICTURE_PATH
 
-class Test(object):
-	def __init__(self):
-		print("__init__ test")
-
-	def __call__(self, *args, **kwargs):
-		print("__call__ test")
-
-t= Test()
-t()
+s = [1,[1,2,3],3]
+y = s.copy()
+print(y)
