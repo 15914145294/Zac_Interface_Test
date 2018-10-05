@@ -39,11 +39,11 @@ import functools
 # 		return self._instance
 
 # 通过装饰器
-def singleton(cls, *args, **kwargs):
+def singleton(cls):
 	instances = {}
 
 	@functools.wraps(cls)
-	def _singleton():
+	def _singleton(*args, **kwargs):
 		if cls not in instances:
 			instances[cls] = cls(*args, **kwargs)
 		return instances[cls]

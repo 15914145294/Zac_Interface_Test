@@ -3,12 +3,11 @@ import re
 import json
 import random
 import string
-from esdwebsite.idcard import get_idard
+from utils.singleton import singleton
 from requests.sessions import Session
-from configs.ad09config import BASE_URL
-from configs.config import FIRST_NAME, LAST_NAME
+from configs.config import ConfigENum
 
-
+@singleton
 class Ad09Util(object):
 	def __init__(self, url):
 		"""
@@ -24,7 +23,7 @@ class Ad09Util(object):
 			self.url = url
 		self.s = Session()
 		self.s.headers.setdefault("Content_type", "application/x-www-form-urlencoded")
-		self.s.headers.update(Referer="%s/ad09" % BASE_URL)
+		self.s.headers.update(Referer="%s/ad09" % ConfigENum.BASE_URL.value)
 		# self.s.cookies.update(self.get_cookies()[0])
 		self.result = self.get_cookies()
 		self.req = self.result[1]
@@ -69,8 +68,8 @@ class Ad09Util(object):
 
 	@staticmethod
 	def get_name():
-		first_name_list = open(FIRST_NAME, encoding='utf-8')  # 打开文件，获取文件句柄
-		last_name_list = open(LAST_NAME, encoding='utf-8')
+		first_name_list = open(ConfigENum.FIRST_NAME.value, encoding='utf-8')  # 打开文件，获取文件句柄
+		last_name_list = open(ConfigENum.LAST_NAME.value, encoding='utf-8')
 		# 从文件中获取用load读取文件，并且把文件中的字符串转换成列表
 		first_names = json.load(first_name_list)
 		last_names = json.load(last_name_list)
@@ -84,5 +83,6 @@ class Ad09Util(object):
 
 
 if __name__ == '__main__':
-	url = "%s/ad09" % BASE_URL
-	print(Ad09Util(url).get_QQNumber())
+	url = "%s/ad09" % ConfigENum.BASE_URL.value
+	print(id(Ad09Util(url)))
+	print(id(Ad09Util(url)))

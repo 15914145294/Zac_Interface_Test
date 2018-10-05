@@ -7,7 +7,7 @@ import re
 from configs.config import BASE_URL
 from utils.customer import customerinfo
 from configs.config import CONFIG_PATH
-from zac.esdwebsite.accessutil import Ad09Util
+from zac.esdwebsite.simpleapply import Ad09Util
 from utils.data import CuctomerDatautil
 from utils.decoration import decorator
 from utils.fileutil import CommonMethods
